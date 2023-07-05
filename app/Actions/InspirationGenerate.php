@@ -19,7 +19,14 @@ class InspirationGenerate {
         $extension = pathinfo($file, PATHINFO_EXTENSION);
         $img = ($extension == 'jpeg' || $extension == 'jpg') ? imagecreatefromjpeg($file) : imagecreatefrompng($file);
 
-        $txt = substr(json_decode(file_get_contents("https://animechan.xyz/api/random"))->quote, 0, $limit);
+        $quote = null;
+        try {
+            $quote = json_decode(file_get_contents("https://animechan.xyz/api/random"))->quote;
+        } catch (\Throwable $th) {
+            $quote = json_decode(file_get_contents("https://api.quotable.io/random"))->content;
+        }
+
+        $txt = substr($quote, 0, $limit);
         $fontFile = "./Roboto.ttf";
         $fontSize = imagesx($img)/$limit*1.5;
         $fontColor = imagecolorallocate($img, 255, 0, 0);
