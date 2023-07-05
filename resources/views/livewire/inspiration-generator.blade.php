@@ -8,7 +8,10 @@
                         <option value="{{$tag}}">{{$tag}}</option>
                         @endforeach
                     </select>
-                    <input type="text" wire:model="limit" class="mb-3 form-control">
+                    <div class="mb-3">
+                        <input type="text" wire:model="limit" class="mb-3 form-control">
+                        @error('limit') <span class="error text-danger">{{ $message }}</span> @enderror
+                    </div>
                     <button class="btn btn-outline-primary mb-3">Generate</button>
                 </form>
             </div>

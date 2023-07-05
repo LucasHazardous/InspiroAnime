@@ -20,6 +20,11 @@ class InspirationGenerator extends Component
         ];
     }
 
+    public function updated($field): void
+    {
+        $this->validateOnly($field, $this->rules());
+    }
+
     public function mount() {
         $this->tags = json_decode(file_get_contents("https://api.waifu.im/tags"))->versatile;
         $this->category = $this->tags[0];
