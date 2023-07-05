@@ -15,7 +15,7 @@ class InspirationGenerator extends Component
 
     protected function rules() {
         return [
-            "limit" => ["required", "integer", "gte:0", "lte:100"],
+            "limit" => ["required", "integer", "gte:5", "lte:100"],
             "category" => ["required", "string", "in:" . implode(",", $this->tags)]
         ];
     }
@@ -26,7 +26,9 @@ class InspirationGenerator extends Component
     }
 
     public function generate() {
-        $res = InspirationGenerate::createAndSaveImage($this->limit, $this->category);
+        $formData = $this->validate($this->rules());
+
+        $res = InspirationGenerate::createAndSaveImage($formData['limit'], $formData ['category']);
         
         $this->image = $res[0];
 

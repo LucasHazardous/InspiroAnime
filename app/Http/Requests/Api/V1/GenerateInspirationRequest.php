@@ -23,7 +23,7 @@ class GenerateInspirationRequest extends FormRequest
     {
         $tags = json_decode(file_get_contents("https://api.waifu.im/tags"))->versatile;
         return [
-            "limit" => ["required", "integer", "gte:0", "lte:100"],
+            "limit" => ["required", "integer", "gte:5", "lte:100"],
             "category" => ["required", "string", "in:" . implode(",", $tags)]
         ];
     }
