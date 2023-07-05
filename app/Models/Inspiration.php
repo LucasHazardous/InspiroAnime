@@ -12,6 +12,7 @@ class Inspiration extends Model
     protected $fillable = [
         'creator',
         'image',
-        'text'
+        'text',
+        'source'
     ];
 }
