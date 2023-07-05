@@ -10,7 +10,7 @@ class InspirationView extends Component
     public function render()
     {
         return view('livewire.inspiration-view', [
-            "inspirations" => Inspiration::paginate(2)->withQueryString()
+            "inspirations" => Inspiration::where("creator", auth()->user()->id)->paginate(2)->withQueryString()
         ]);
     }
 }
