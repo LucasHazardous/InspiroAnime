@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Inspiration;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
 class DeleteInspirationForm extends Component
@@ -16,8 +17,10 @@ class DeleteInspirationForm extends Component
 
     public function deleteInspiration()
     {
-        if($this->inspiration->creator == auth()->user()->id)
+        if($this->inspiration->creator == auth()->user()->id) {
+            Storage::disk("public")->delete($this->inspiration->image);
             $this->inspiration->delete();
+        }
 
         return redirect()->route('inspirations.index');
     }

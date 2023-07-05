@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\V1\GenerateInspirationRequest;
 use App\Models\Inspiration;
 use App\Traits\HttpResponses;
+use Illuminate\Support\Facades\Storage;
 
 class ApiV1InspirationController extends Controller
 {
@@ -61,6 +62,7 @@ class ApiV1InspirationController extends Controller
     public function destroy(Inspiration $inspiration)
     {
         if($inspiration->creator == auth()->user()->id) {
+            Storage::disk("public")->delete($inspiration->image);
             $inspiration->delete();
             return $this->success(null,null,204);
         }
