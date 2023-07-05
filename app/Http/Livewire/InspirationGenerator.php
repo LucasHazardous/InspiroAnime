@@ -13,6 +13,13 @@ class InspirationGenerator extends Component
     public $category;
     public $tags;
 
+    protected function rules() {
+        return [
+            "limit" => ["required", "integer", "gte:0", "lte:100"],
+            "category" => ["required", "string", "in:" . implode(",", $this->tags)]
+        ];
+    }
+
     public function mount() {
         $this->tags = json_decode(file_get_contents("https://api.waifu.im/tags"))->versatile;
         $this->category = $this->tags[0];
