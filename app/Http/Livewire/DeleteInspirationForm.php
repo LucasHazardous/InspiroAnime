@@ -16,7 +16,8 @@ class DeleteInspirationForm extends Component
 
     public function deleteInspiration()
     {
-        $this->inspiration->delete();
+        if($this->inspiration->creator == auth()->user()->id)
+            $this->inspiration->delete();
 
         return redirect()->route('inspirations.index');
     }
