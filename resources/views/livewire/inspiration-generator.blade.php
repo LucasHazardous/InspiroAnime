@@ -14,7 +14,7 @@
             </div>
         </div>
         @if (!is_null($image))
-            <img src="storage/{{$image}}" alt="inspiration" style="max-height: 800px;object-fit: contain;" width="100%">
+            <img src="/storage/{{$image}}" alt="inspiration" style="max-height: 800px;object-fit: contain;" width="100%">
         @endif
     </div>
 </div>

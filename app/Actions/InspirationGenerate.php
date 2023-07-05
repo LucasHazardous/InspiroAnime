@@ -9,7 +9,7 @@ class InspirationGenerate {
     public static function createAndSaveImage(string $limit, string $tag): array {
         $imgData = json_decode(file_get_contents("https://api.waifu.im/search?included_tags=$tag&is_nsfw=false"));
         $url = $imgData->images[0]->url;
-        $source = $imgData->images[0]->source;
+        $source = $imgData->images[0]->source ?? "unknown";
 
         $info = pathinfo($url);
         $contents = file_get_contents($url);

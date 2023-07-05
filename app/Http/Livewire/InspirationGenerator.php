@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Actions\InspirationGenerate;
+use App\Models\Inspiration;
 use Livewire\Component;
 
 class InspirationGenerator extends Component
@@ -18,7 +19,16 @@ class InspirationGenerator extends Component
     }
 
     public function generate() {
-        $this->image = InspirationGenerate::createAndSaveImage($this->limit, $this->category)[0];
+        $res = InspirationGenerate::createAndSaveImage($this->limit, $this->category);
+        
+        $this->image = $res[0];
+
+        Inspiration::create([
+            "creator" => auth()->user()->id,
+            "image" => $res[0],
+            "text" => $res[1],
+            "source" => $res[2]
+        ]);
     }
 
     public function render()
