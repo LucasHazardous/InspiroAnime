@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('creator')->references('id')->on('users')->cascadeOnDelete();
             $table->string('image');
             $table->string('text');
+            $table->string('source');
             $table->timestamps();
         });
     }
