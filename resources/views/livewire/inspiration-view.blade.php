@@ -1,4 +1,6 @@
-<div class="py-12 row-cols-1">
+<div class="py-12">
+
+    <input type="text" class="form-control mb-4" placeholder="Search for inspirations..." wire:model.debounce.500ms="search">
 
     @foreach ($inspirations as $inspiration)
         <div class="card row mb-4">
